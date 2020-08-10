@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import background from "../../static/images/bitcoin.jpg";
+import moment from "moment";
 
 const useStyles = (theme) => ({
   root: {
@@ -15,41 +17,49 @@ const useStyles = (theme) => ({
     border: 0,
     borderRadius: 3,
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "white",
-    padding: "0 30px",
-    height: 240,
+    color: "#EEDBD8",
+    height: 400,
   },
-  media: {},
+  media: {
+    height: 65,
+    padding: 0,
+  },
+  header: {
+    color: "#000",
+    marginBottom: 20,
+  },
 });
 
 class InfoCard extends Component {
   render() {
     const { classes } = this.props;
+    let latest = this.props.latest;
     return (
       <Card className={classes.root}>
         <CardActionArea>
-          <CardMedia
+          {/* <CardMedia
             className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          />
+            image={background}
+            title="Bitcoin bg"
+          /> */}
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {this.props.header}
+            <Typography variant="h5" component="p" className={classes.header}>
+              Bitcoin UI
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {this.props.details}
+            <Typography variant="h6" component="p">
+              {`The latest currency value is ${latest.Value.toLocaleString(
+                "en-US",
+                {
+                  style: "currency",
+                  currency: "USD",
+                }
+              )} (USD) as of ${moment(latest.Date).format(
+                "dddd, Do MMM YYYY"
+              )}`}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions>
+        <CardActions></CardActions>
       </Card>
     );
   }

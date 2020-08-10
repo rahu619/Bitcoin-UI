@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 ReactDOM.render(
-  <Container maxWidth={true}>
+  <Container maxWidth={false}>
     <HomePage />
   </Container>,
   document.getElementById("root")

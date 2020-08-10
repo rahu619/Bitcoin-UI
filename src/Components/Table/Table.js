@@ -48,15 +48,19 @@ class MaterialTableDemo extends Component {
 
   render() {
     let data = this.props.bitcoinCollection.map((x) => ({
-      day: moment(x.Date).format("dddd, DD MMM"),
+      day: moment(x.Date).format("dddd, DD MMM yyyy"),
       year: x.Date.getFullYear(),
-      value: x.Value,
+      value: x.Value.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      }),
+      cellStyle: { padding: "25px" },
     }));
-    console.log("table load", data);
+    //debugger;
     const header = [
       { title: "Day", field: "day" },
       { title: "Year", field: "year", type: "numeric" },
-      { title: "Currency", field: "value" },
+      { title: "US Dollar Value", field: "value" },
     ];
 
     if (data !== null && data !== undefined) {

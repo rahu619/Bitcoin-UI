@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import moment from "moment";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -24,6 +23,13 @@ const useStyles = (theme) => ({
     primary: {
       main: "#E33E7F",
     },
+  },
+  spinnerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 600,
+    verticalAlign: "middle",
   },
 });
 
@@ -60,7 +66,7 @@ class HomePage extends Component {
   render() {
     const { classes } = this.props;
     if (this.state.data == null) {
-      return <div>{<Spinner />}</div>;
+      return <div className={classes.spinnerContainer}>{<Spinner />}</div>;
     } else {
       return (
         <div className={classes.root}>
@@ -69,29 +75,17 @@ class HomePage extends Component {
               <MenuBar />
             </Grid>
             <Grid item xs={5}>
-              <Paper
-                className={classes.paper}
-                style={{ marginTop: "3%" }}
-                elevation={0}
-                square={false}
-              >
-                <InfoCard
-                  header={`BitCoin Info`}
-                  details={`The latest currency value is ${
-                    this.LatestValue.Value
-                  } (USD) as of ${moment(this.LatestValue.Date).format(
-                    "dddd, Do MMM YYYY"
-                  )}`}
-                />
+              <Paper className={classes.paper} elevation={0} square={false}>
+                <InfoCard latest={this.LatestValue} />
               </Paper>
             </Grid>
             <Grid item xs={7}>
               <Paper className={classes.paper} elevation={0}>
-                <LineChart bitcoinCollection={this.state.data} />
+                <Table bitcoinCollection={this.state.data} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Table bitcoinCollection={this.state.data} />
+              <LineChart bitcoinCollection={this.state.data} />
             </Grid>
           </Grid>
         </div>

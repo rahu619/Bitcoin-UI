@@ -1,5 +1,6 @@
 import * as React from "react";
 import Paper from "@material-ui/core/Paper";
+import moment from "moment";
 import {
   Chart,
   ArgumentAxis,
@@ -34,27 +35,34 @@ class LineChart extends React.PureComponent {
     super(props);
   }
 
-  get currentYear() {
-    return new Date().getFullYear();
-  }
-
   render() {
-    let refinedData = this.props.bitcoinCollection.map(
-      (x) => new BitCoinPriceModel(x.Date, Math.round(x.Value))
+    let bitCoinExchangeCollection = this.props.bitcoinCollection;
+
+    //as we get the data in descending order
+    let startDate =
+      bitCoinExchangeCollection[bitCoinExchangeCollection.length - 1].Date;
+    let endDate = bitCoinExchangeCollection[0].Date;
+    let refinedData = bitCoinExchangeCollection.map(
+      (x) =>
+        new BitCoinPriceModel(
+          moment(x.Date).format("MM/DD/YYYY"),
+          Math.round(x.Value)
+        )
     );
 
-    console.log("chart data:", refinedData);
+    // console.log("chart data:", refinedData);
     return (
       <Paper>
         <Chart data={refinedData} height={450}>
-          <ArgumentScale factory={scaleTime} />
-          <ValueScale factory={scaleLog} modifyDomain={modifyDomain} />
+          {<ArgumentScale factory={scaleTime} />}
           <ArgumentAxis />
-          <ValueAxis tickFormat={format} />
+          <ValueAxis />
 
           <LineSeries valueField="Value" argumentField="Date" />
           <Title
-            text={`Average USD market trend across bitcoin exchanges (${this.currentYear})`}
+            text={`Bitcoin price trend (${moment(startDate).format(
+              "DD MMM yyyy"
+            )} to ${moment(endDate).format("DD MMM yyyy")})`}
           />
           <Animation />
         </Chart>
