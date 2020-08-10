@@ -1,4 +1,4 @@
-A home page for showcasing bitcoin exchange rates. 
+A home page for showcasing the bitcoin exchange rates. 
 
 ## Available Scripts
 
@@ -15,7 +15,9 @@ You will also see any lint errors in the console.
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Caveats
+## Instructions
 
-The API Url (https://localhost:5001/api/v1/bitcoin/latest) is hardcoded in the BitCoinService js file rather than being in an config/enviornment file. 
-The docker files included in the project are just the boiler plate ones and haven't been tested. (Spent bit of time with docker toolbox and couldn't get it working, Duh)
+The API Url would be https://localhost:5001/api/v1/bitcoin/latest) which is at the moment hardcoded in the BitCoinService js file 
+rather than being in a separate config/enviornment file. 
+
+Unfortunately the docker files included in the project are just the boiler plate ones and haven't been tested. (I use windows home edition and had few issues with docker toolbox installation)
