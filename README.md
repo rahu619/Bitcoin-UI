@@ -1,4 +1,4 @@
-A home page for showcasing the bitcoin exchange rates. 
+A web page for showcasing the bitcoin exchange rates. 
 
 ## Available Scripts
 
